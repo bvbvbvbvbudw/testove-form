@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        loadingCircle(true)
+        loadingCircle(true);
         const formData = new FormData(form);
         const emailInput = form.querySelector('input[name="email"]');
         const emailValue = emailInput.value.trim();
 
         if (!isValidEmail(emailValue)) {
             displayErrorMessage();
-            loadingCircle(false)
+            loadingCircle(false);
             return;
         }
 
@@ -63,6 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function loadingCircle(boolean){
-        loading.style.display = boolean ? 'block' : 'none'
+        loading.style.display = boolean ? 'block' : 'none';
     }
 });
