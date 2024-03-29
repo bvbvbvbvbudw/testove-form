@@ -30,8 +30,8 @@ function sendEmail($name, $email, $description) {
 
         $mail->setFrom($smtpConfig['username'], 'Testove');
 
-//        $recipient = '6weeks.12h@gmail.com';
-        $recipient = 'b12522033@gmail.com';
+        $recipient = '6weeks.12h@gmail.com';
+//        $recipient = 'b12522033@gmail.com';
         $mail->addAddress($recipient);
 
         $mail->isHTML(false);
