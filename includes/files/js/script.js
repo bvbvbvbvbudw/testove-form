@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!isValidEmail(emailValue)) {
             displayErrorMessage();
+            loadingCircle(false)
             return;
         }
 
