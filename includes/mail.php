@@ -2,10 +2,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'smtp_settings.php';
+require 'settings.php';
 
 function sendEmail($name, $email, $description) {
-    global $smtpConfig;
+    global $smtpConfig, $recipient;
 
     if (!isset($smtpConfig['host'], $smtpConfig['port'], $smtpConfig['username'], $smtpConfig['password'], $smtpConfig['secure'])) {
         echo json_encode(array("success" => false, "error" => "smtp configuration is incomplete"));
@@ -30,8 +30,6 @@ function sendEmail($name, $email, $description) {
 
         $mail->setFrom($smtpConfig['username'], 'Testove');
 
-        $recipient = '6weeks.12h@gmail.com';
-//        $recipient = 'b12522033@gmail.com';
         $mail->addAddress($recipient);
 
         $mail->isHTML(false);

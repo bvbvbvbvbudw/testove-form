@@ -1,4 +1,8 @@
 <?php
+
+//$recipient = '6weeks.12h@gmail.com';
+$recipient = 'b12522033@gmail.com';
+
 $smtpConfig = array(
     'host' => 'smtp.mailersend.net',
     'port' => 587,

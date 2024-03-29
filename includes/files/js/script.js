@@ -6,21 +6,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        loadingCircle(true);
+        toggleLoading(true);
         const formData = new FormData(form);
         const emailInput = form.querySelector('input[name="email"]');
         const emailValue = emailInput.value.trim();
 
         if (!isValidEmail(emailValue)) {
             displayErrorMessage();
-            loadingCircle(false);
+            toggleLoading(false);
             return;
         }
 
-        fetchEmailData(formData)
-            .then(handleResponse)
+        sendFormData(formData)
+            .then(handleFetchResponse)
             .catch(handleError)
-            .finally(() => loadingCircle(false));
+            .finally(() => toggleLoading(false));
     });
 
     const closeModalButton = document.getElementById('closeModal');
@@ -29,24 +29,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function isValidEmail(email) {
-        var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        return regex.test(email);
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
     }
 
-    function fetchEmailData(formData) {
+    function sendFormData(formData) {
         return fetch('includes/send.php', {
             method: 'POST',
             body: formData
-        }).then(response => {
-            if (!response.ok) {
-                throw new Error('network response was not ok');
-            }
-            return response.json();
         });
     }
 
-    function handleResponse(data) {
-        if (data.success) {
+    function handleFetchResponse(response) {
+        if (response.ok) {
             modal.style.display = 'block';
         } else {
             displayErrorMessage();
@@ -58,11 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function handleError(error) {
-        console.error(error);
+        console.error('An error occurred:', error);
         displayErrorMessage();
     }
 
-    function loadingCircle(boolean){
-        loading.style.display = boolean ? 'block' : 'none';
+    function toggleLoading(shouldDisplay) {
+        loading.style.display = shouldDisplay ? 'block' : 'none';
     }
 });
