@@ -1,4 +1,10 @@
 {
+  "name": "testove-6weeks/mail",
+  "autoload": {
+    "files": [
+      "config.php"
+    ]
+  },
   "require": {
     "phpmailer/phpmailer": "^6.5"
   }

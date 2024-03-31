@@ -1,5 +1,7 @@
 <?php
-require '../vendor/autoload.php';
+
+require_once dirname(__DIR__) . '/config.php';
+
 require 'mail.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
